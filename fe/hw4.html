@@ -1,12 +1,173 @@
-<!doctype html>
-
+<!DOCTYPE>
 <html>
-<head>
-    <meta http-equiv="content-type" content="text/html;charset=gb2312">
-    <title>这里是第四次作业</title>
-</head>
-
-<body>
-    <p>很抱歉，目前内容为空。</p>
-    <p>点击<a href="http://thu12czz.github.io/index.html">这里</a>以跳转回首页。</p>
-</body>
+    <head>
+	    <meta charset="utf-8">
+		<title>新闻图片轮播</title>
+		<style>
+		    .imgContainer {
+			    width: 800px;
+				margin: 20px auto;
+				padding: 10px;
+			}
+		    .bigImg-box {
+	            min-height: 200px;
+            }
+			.box {
+	            width: 800px;
+	            overflow: hidden;
+			}
+			p {
+			    text-indent: 2em;
+				width: 800px;
+				height: 80px;
+			}
+			.smallImg-box {
+			    width: 800px;
+			    height: 100px;
+			}
+			ul,li {
+	            margin: 0;
+	            padding: 0;
+	            list-style: none;
+            }
+			.imgUl {
+	            position: relative;
+				width: 900px;
+            }
+			.smallImg_0{
+			    float: left;
+				padding-right: 16px;
+			}
+			.pageChange {
+			    width: 800px;
+				height: 25px;
+			}
+			.frontPageForPicture{
+			    margin-left: 337px;
+			}
+			.nextPageForPicture{
+			    margin-left: 6px;
+			}
+			
+			.commentContainer {
+			    width: 800px;
+				margin: 20px auto;
+				padding: 10px;
+			}
+			.pageChoose {
+			    width: 800px;
+				height: 30px;
+			}
+			table {
+			    border-collapse: collapse;
+			}
+			.leftColumn {
+			    width: 250px;
+				height: 80px;
+			}
+			.rightColumn {
+			    width: 550px;
+				height: 80px;
+			}
+			td:hover {
+			    color: red;
+			}
+		</style>
+		<script type="text/javascript" src="http://learn.cic.tsinghua.edu.cn:80/res/common/js/library/jquery/jquery-1.7.2.min.js"></script>
+		<script type="text/javascript" src="js/picture.js"></script>
+		<script type="text/javascript" src="js/comment.js"></script>
+	</head>
+	
+	<body>
+	    <div class="imgContainer">
+		    <h2>图片区</h2>
+			<div id="bigImg-box" class="box" >
+				<a class="bigImg_0" id="bigImg-use" herf="">
+				</a>
+			    <p id="describe"></p>
+			</div>
+			<div class="smallImg-box" class="box">
+			    <ul id="smallImg-ul" class="imgUl">
+					<li class="smallImg_0">
+					</li>
+					<li class="smallImg_0">
+					</li>
+					<li class="smallImg_0">
+					</li>
+					<li class="smallImg_0">
+					</li>
+					<li class="smallImg_0">
+					</li>
+					<li class="smallImg_0">
+					</li>
+				</ul>
+			</div>
+            <div class="pageChange">
+			    <button type="botton" class="frontPageForPicture">上一页</button>
+				<button type="botton" class="nextPageForPicture">下一页</button>
+			</div>
+		</div>
+		<div class="commentContainer">
+		    <h2>评论区</h2>
+		    <div class="pageChoose">
+			    <button class="C_goToFirstPage" onclick="C_goToFirstPage()">首页</button>
+				<button class="C_goToFrontPage" onclick="C_goToFrontPage()">上一页</button>
+				<button class="C_goToNextPage" onclick="C_goToNextPage()">下一页</button>
+				<button class="C_goToLastPage" onclick="C_goToLastPage()">尾页</button>
+			</div>
+		    <table border="1">
+			    <tr>
+				    <td class="leftColumn"></td>
+					<td class="rightColumn"></td>
+				</tr>
+				<tr>
+				    <td class="leftColumn"></td>
+					<td class="rightColumn"></td>
+				</tr>
+				<tr>
+				    <td class="leftColumn"></td>
+					<td class="rightColumn"></td>
+				</tr>
+				<tr>
+				    <td class="leftColumn"></td>
+					<td class="rightColumn"></td>
+				</tr>
+				<tr>
+				    <td class="leftColumn"></td>
+					<td class="rightColumn"></td>
+				</tr>
+			</table>
+			<div class="pageChoose">
+			    <button class="C_goToFirstPage" onclick="C_goToFirstPage()">首页</button>
+				<button class="C_goToFrontPage" onclick="C_goToFrontPage()">上一页</button>
+				<button class="C_goToNextPage" onclick="C_goToNextPage()">下一页</button>
+				<button class="C_goToLastPage" onclick="C_goToLastPage()">尾页</button>
+			</div>
+		</div>
+		<hr />
+		<center><p>Copyright By Teacher Chen <a href="http://thu12czz.github.io/">personal page</a></p></center>
+	    <script type="text/javascript">
+		
+        $('#bigImg-box').mouseover(function(e){clearInterval(again);}).mouseout(function(e){again = setInterval("slideToRight()",5000)});
+	
+	    $('[class=frontPageForPicture]').click(function (e){P_goToFrontPage();});
+	    $('[class=nextPageForPicture]').click(function (e){P_goToNextPage();});
+	
+	    $('[class=smallImg_0]')[0].addEventListener('click', function (evt){
+		    if(currentPicture % 6 != 0){bigImgChange(0);}}, false);
+	    $('[class=smallImg_0]')[1].addEventListener('click', function (evt){
+		    if(currentPicture % 6 != 1){bigImgChange(1);}}, false);
+	    $('[class=smallImg_0]')[2].addEventListener('click', function (evt){
+		    if(currentPicture % 6 != 2){bigImgChange(2);}}, false);
+	    $('[class=smallImg_0]')[3].addEventListener('click', function (evt){
+		    if(currentPicture % 6 != 3){bigImgChange(3);}}, false);
+	    $('[class=smallImg_0]')[4].addEventListener('click', function (evt){
+		    if(currentPicture % 6 != 4){bigImgChange(4);}}, false);
+	    $('[class=smallImg_0]')[5].addEventListener('click', function (evt){
+		    if(currentPicture % 6 != 5){bigImgChange(5);}}, false);
+		
+        	
+		resetComment();
+	</script>
+	</body>
+</html>
