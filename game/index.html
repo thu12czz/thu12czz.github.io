@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style>
+
+#item
+{
+	background-image:url(images/textbg.jpg);
+	position:absolute;
+	left:160px;
+	top:120px;	
+	width:480px;
+	height:160px;
+	opacity: 0;
+	font-size:16px;
+}
+
+#item tr
+{
+	width:480px;
+	height:40px;
+}
+#item td
+{
+	width:120px;
+	height:40px;
+	text-align:center;
+}
+
+
+#gameCanvas
+{
+	position:absolute;
+	left:80px;
+	top:40px;
+}
+
+#information
+{
+	background-image:url(images/textbg.jpg);
+	position:absolute;
+	left:200px;
+	top:400px;	
+	width:400px;
+	height:80px;
+	opacity: 0;
+}
+
+#information p
+{
+	position:absolute;
+	left : 20px;
+	width: 360px;
+	height : 20px;
+	font-size:16px;
+	margin:0px;
+}
+
+.information1
+{
+	color:#F00
+}
+
+.information2
+{
+	color:#000;
+}
+
+#information p:nth-child(1)
+{
+	top:10px;
+}
+#information p:nth-child(2)
+{
+	top:50px;
+}
+
+#prompt
+{
+	background-image:url(images/textbg.jpg);
+	position:absolute;
+	left:320px;
+	top:300px;	
+	width:160px;
+	height:70px;
+	opacity: 0;
+}
+#prompt p
+{
+	position:absolute;
+	left:20px;
+	width:120px;
+	height:20px;
+	font-size:12px;
+	text-align:center;
+	margin:0px;
+}
+
+#prompt p:nth-child(1){ top:10px;
+}
+
+#prompt p:nth-child(2){ top:30px;
+}
+
+#prompt p:nth-child(3){ top:50px;
+}
+
+#Iteminformation
+{
+	background-image:url(images/textbg.jpg);
+	position:absolute;
+	left:200px;
+	top:400px;	
+	width:400px;
+	height:80px;
+	opacity: 0;
+	font-size:16px;
+}
+#Iteminformation p
+{
+	position:absolute;
+	top:10px;
+	left : 20px;
+	width: 360px;
+	height : 20px;
+	font-size:16px;
+	margin: 0px;
+}
+
+
+</style>
+</head>
+<div id="wrap">
+<canvas id="gameCanvas">
+</canvas>
+<div id = 'item'>
+	<table id = 'itemtable'>
+		<tr>
+        	<td></td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+        	<td></td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+        	<td></td><td></td><td></td><td></td>
+        </tr>
+         <tr>
+        	<td></td><td></td><td></td><td></td>
+        </tr>
+    </table>  
+</div>
+<div id = 'prompt'> </div>
+<div id = 'information'></div>
+<div id = 'Iteminformation'></div>
+</div>
+<body>
+</body>
+<script type='text/javascript' src="HTMLGame.js"></script>
+<script type='text/javascript' src='jquery-2.1.1.min.js'></script>
+<script type='text/javascript' src="game.js"></script>
+<script type='text/javascript' src="map.js"></script>
+<script type='text/javascript' src="event.js"></script>
+<script type='text/javascript' src="ItemList.js"></script>
+<script>
+</script>
+</html>
