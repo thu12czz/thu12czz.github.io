@@ -585,51 +585,6 @@ HTMLGame.NewSpace("HTMLGame.shape",function(argu)
             }
             return this;
         },
-		
-        /*改变尺寸*/
-        resize: function(dSize) {
-            this.size[0] += dSize[0];
-            this.size[1] += dSize[1];
-            return this;
-        },
-		
-        /*改变尺寸*/
-        resizeTo: function(size) {
-            this.width = size[0];
-            this.height = size[1];
-            return this;
-        },
-		
-        /*返回是否在某对象左边*/
-        isLeftTo:function(obj,isCenter){//isCenter:是否以中点为依据判断
-            if(isCenter) return this.pos[0] < obj.pos[0];
-            return this.pos[0] + this.size[0] / 2 < obj.pos[0] - obj.size[0] / 2;
-        },
-        /*返回是否在某对象右边*/
-        isRightTo:function(obj,isCenter){
-            if(isCenter) return this.pos[0] > obj.pos[0];
-            return this.pos[0] - this.size[0] / 2 > obj.pos[0] + obj.size[0] / 2;
-        },
-        /*返回是否在某对象上边*/
-        isTopTo:function(obj,isCenter){
-            if(isCenter) return this.pos[1] < obj.pos[1];
-            return this.pos[1] + this.size[1] / 2 < obj.pos[1] - obj.size[0] / 2;
-        },
-        /*返回是否在某对象下边*/
-        isBottomTo:function(obj,isCenter){
-            if(isCenter) return this.pos[1] > obj.pos[1];
-            return this.pos[1] - this.size[0] / 2 > obj.pos[1] + obj.size[1] / 2;
-        },
-        /*点是否在矩形内*/            
-        isInside:function(point){
-            var pointX = point[0];
-            var pointY = point[1];
-            var x = this.pos[0];
-            var y = this.pos[1];
-            var right = x + this.size[0];
-            var bottom = y + this.size[1];
-            return (pointX >= x && pointX <= right && pointY >= y && pointY <= bottom);
-        },
     };
 	var text=function(text,options){
 		if(!(this instanceof arguments.callee)){
@@ -851,7 +806,7 @@ HTMLGame.NewSpace("HTMLGame", function(argu)
 				width:120,
 				height:40,
 				frameSize:[40,40],
-				frameDuration:100,
+				frameDuration:200,
 				direction:"right",	//从左到右
 				beginX:0,
 				beginY:0,

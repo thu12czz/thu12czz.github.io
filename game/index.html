@@ -9,22 +9,22 @@
 {
 	background-image:url(images/bdtext.png);
 	position:absolute;
-	left:160px;
-	top:120px;	
-	width:480px;
+	left:170px;
+	top:130px;	
+	width:460px;
 	height:160px;
 	opacity: 0;
-	font-size:16px;
+	font-size:14px;
 }
 
 #item tr
 {
-	width:480px;
+	width:460px;
 	height:40px;
 }
 #item td
 {
-	width:120px;
+	width:115px;
 	height:40px;
 	text-align:center;
 }
@@ -138,13 +138,28 @@
 	margin: 0px;
 }
 
+#inputPassword 
+{		
+		position:absolute;
+		left:280px;
+		top:300px;	
+		width: 200px;
+		height: 26px;
+		margin: auto;
+		opacity: 0;
+		background-color: rgb(83,150,203);
+}
+#password {
+margin-left: 25px;
+}
+
 
 </style>
 </head>
 <div id="wrap">
 <canvas id="backgroundCanvas" height="520" width="640"></canvas>
 <canvas id="gameCanvas"></canvas>
-<audio src="images/bgm.mp3" loop="loop" autoplay = "autoplay"></audio>
+<audio src="images/bgm.mp3" loop = "loop" autoplay="autoplay"></audio>
 <div id = 'item'>
 	<table id = 'itemtable'>
 		<tr>
@@ -164,6 +179,8 @@
 <div id = 'prompt'> </div>
 <div id = 'information'></div>
 <div id = 'Iteminformation'></div>
+<div id="inputPassword">
+<input type="text"  id="password" onkeypress="checkForm()"/></div>
 </div>
 <body>
 </body>

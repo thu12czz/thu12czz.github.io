@@ -40,7 +40,10 @@ var closegetItem =function()
 		LastStaus = 3;
 	}
 	gameStaus = LastStaus;
-	LastStaus = 1;
+	if(LastStaus = 3)
+	{
+		LastStaus = 1
+	};
 }
 var showItemList = function()
 {
@@ -49,7 +52,7 @@ var showItemList = function()
 	{
 		if(ItemList[i].number > 0)
 		{
-			$('#item').find('td:eq(' + currentItemNumber +')').append('<p>' + ItemList[i].name +'  * '+ ItemList[i].number + '</p>');
+			$('#item').find('td:eq(' + currentItemNumber +')').append('<p>' + ItemList[i].name +' *'+ ItemList[i].number + '</p>');
 			Itemlistcheck[currentItemNumber] = i + 1;
 			currentItemNumber++;
 		}
@@ -158,14 +161,14 @@ var useItem = function(){
 		}
 		else if(investigate.map[9].mapevent[4].flag == 1){
 			showItemInformation("再次用螺丝刀把水龙头拧了回去，我想这次能正常工作了吧。");
-			investigate.map[9].event[4].flag = 2;
+			investigate.map[9].mapevent[4].flag = 2;
 			gameStaus = 4;
 		}
 	}
 	else if(Itemlistcheck[stressItem] == 12&& targe == 7 && currentmap == 11){
-		if(investigate.map[10].event[3].flag == 1){
+		if(investigate.map[10].mapevent[3].flag == 1){
 			showItemInformation("啊，这个就是我的手镯，太谢谢你了。你帮了我这么多忙，我该如何感谢你才好啊….对了这个送给你吧");
-			investigate.map[10].event[3].flag = 2;
+			investigate.map[10].mapevent[3].flag = 2;
 			gameStaus = 4;
 			getItem([[12,1],[11,-1]]);
 		}
@@ -211,7 +214,7 @@ var ItemList = [
 		},
 		{
 			name: "古老的钥匙",
-			description: "一枚古老的钥匙，看起来可以打开这扇门了。",
+			description: "一枚古老的钥匙，看起来可以打开这扇门。",
 			number: 0
 		},
 		{
