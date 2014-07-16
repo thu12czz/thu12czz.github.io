@@ -500,7 +500,7 @@ var gameObj = (function()
 /*	开始界面对象	*/
 var startObj={
 	initialize:function(options){
-		var name="逗比历险记";
+		var name="Forget";
 		var begin="按回车键开始";
 		var state1="游戏说明：方向键上下左右控制移动.";
 		var state2="z键确认或探索或使用道具,x键取消,c键打开或关闭道具栏";
