@@ -401,7 +401,7 @@ var investigate = {
 							if(this.Staus == 0){
 								this.Staus = 1;
 								showInformation("地上有一个被打翻的酒瓶….看起来是喝醉了之后打翻的吧，不过力道好像不大，瓶子都没有碎….嗯？这是什么….");
-								getItem[[5,1]];
+								getItem([[5,1]]);
 							}
 							else{
 								clearinfomation();
@@ -456,7 +456,7 @@ var investigate = {
 								if(this.Staus == 0){
 									this.Staus = 1;
 									showInformation("似乎用这把黄色的钥匙可以打开，嗯，打开了，这个是…");
-									getItem[[2,1]];
+									getItem([[2,1]]);
 								}
 								else{
 									clearinfomation();
@@ -648,7 +648,7 @@ var investigate = {
 							this.Staus = 0;
 							clearinfomation();
 							this.flag = 1;
-							getItem[[4,1]];
+							getItem([[4,1]]);
 						}
 						else{
 							this.Staus = 0;
@@ -726,7 +726,7 @@ var investigate = {
 							{
 								showInformation("打开了！里面有什么东西");
 								this.flag = 1;
-								getItem[[2,1]];
+								getItem([[2,1]]);
 							}
 							else{
 								showInformation("这个密码好像不对");
@@ -760,7 +760,7 @@ var investigate = {
 						if(this.Staus == 0){
 							this.Staus = 1;
 							showInformation("这个抽屉柜没上锁，里面有一把螺丝刀");
-							getItem[[10,1]];
+							getItem([[10,1]]);
 						}
 						else{
 							clearinfomation();
@@ -821,7 +821,7 @@ var investigate = {
 						if(this.Staus == 0){
 							this.Staus = 1;	
 							showInformation("看起来很舒适的桌椅，坐在这里读书一定很惬意。等等，这个桌子上有一枚珍珠");
-							getItem[[4,1]];
+							getItem([[4,1]]);
 						}
 						else{
 							clearinfomation();
@@ -1002,6 +1002,7 @@ var investigate = {
 						else if(this.Staus == 2)
 						{
 							showInformation("好奇怪，按了键却没有声音…..这架钢琴的发条不见了吗？");
+							this.Staus++;
 						}
 						else{
 							clearinfomation();
@@ -1063,7 +1064,7 @@ var investigate = {
 						{
 							showInformation("好像有什么在发光");
 							this.Staus = 4; 
-							getItem[[4,1]];
+							getItem([[4,1]]);
 						}
 						else if(this.Staus == 4)
 						{
@@ -1185,7 +1186,7 @@ var investigate = {
 						else if(this.Staus == 1){
 							this.Staus ++;	
 							showInformation("小熊身旁掉下了一枚钥匙");
-							getItem[[9,1]];
+							getItem([[9,1]]);
 						}
 						else{
 							clearinfomation();
@@ -1244,7 +1245,7 @@ var investigate = {
 							{
 								showInformation("打开了！这个好像是什么东西的配件");
 								this.flag = 1;
-								getItem[[8,1]];
+								getItem([[8,1]]);
 							}
 							else{
 								showInformation("这个密码好像不对");
@@ -1343,7 +1344,7 @@ var investigate = {
 						if(this.Staus == 0){
 							this.Staus = 1;	
 							showInformation("装满餐具的柜子，盘子地下似乎有一颗珍珠。");
-							getItem[[4,1]];
+							getItem([[4,1]]);
 						}
 						else{
 							clearinfomation();
@@ -1471,7 +1472,7 @@ var investigate = {
 							if(vpass == "6444"){
 								showInformation("打开了！里面有一把钥匙");
 								this.flag = 1;
-								getItem[[7,1]];
+								getItem([[7,1]]);
 							}
 							else{
 								showInformation("这个密码好像不对");
@@ -1533,7 +1534,7 @@ var investigate = {
 						else if(this.Staus == 2){
 							showInformation("里面有一块镜子的碎片");
 							this.Staus = 4;
-							getItem[[2,1]];
+							getItem([[2,1]]);
 						}
 						else if(this.Staus == 4){
 							this.flag = 1;
@@ -1794,7 +1795,7 @@ var investigate = {
 						else if(this.Staus == 4){
 							showInformation("我就知道你会的….哼哼哼，多谢了。");
 							this.Staus = 6;
-							getItem([[2,0]])
+							getItem([[2,0]]);
 						}
 						else if(this.Staus == 5)
 						{
@@ -1836,7 +1837,7 @@ var investigate = {
 						if(this.Staus == 0){
 							this.Staus = 1;	
 							showInformation("看起来是做什么的水晶球…..总觉得和这个房间的格调不太般配。嗯？这里有一枚珍珠");
-							getItem[[4,1]];
+							getItem([[4,1]]);
 						}
 						else{
 							clearinfomation();
@@ -2067,7 +2068,7 @@ var investigate = {
 						if(this.Staus == 0){
 							this.Staus = 1;	
 							showInformation("一个首饰盒，里面有一些首饰，还有……这个珍珠为什么看起来这么…..");
-							getItem[[4,1]];
+							getItem([[4,1]]);
 						}
 						else{
 							clearinfomation();
