@@ -131,6 +131,8 @@ var useItem = function(){
 			mirrorFlag = true;
 			gameStaus = 4;
 			getItem([[2,-4],[12,-1]]);
+			investigate.map[15].mapevent[3].flag = 1;
+			
 		}
 		else{
 			showItemInformation("看起来这些碎片应该是这个镜子的。不过，貌似缺了一点什么。");
@@ -187,8 +189,7 @@ var useItem = function(){
 			ItemList[4].number = 0;
 			ItemList[14].number = 0;
 			gameStaus = 4;
-			getItem(15);
-			getItem([[4,-7],[14,1],[15,1]]);
+			getItem([[4,-7],[14,-1],[15,1]]);
 		}
 	}
 }

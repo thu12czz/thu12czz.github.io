@@ -1069,7 +1069,7 @@ var investigate = {
 						else if(this.Staus == 4)
 						{
 							this.flag = 2;
-							investigate.map[7].mapevent[7].flag = 2;
+							investigate.map[7].mapevent[6].flag = 2;
 							clearinfomation();
 							this.Staus = 0;
 						}
@@ -1530,7 +1530,6 @@ var investigate = {
 							if(mypassword == "6444"){
 								showInformation("打开了！里面有一把钥匙");
 								this.flag = 1;
-								getItem([[7,1]]);
 								this.Staus ++;
 							}
 							else{
