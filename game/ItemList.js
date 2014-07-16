@@ -186,8 +186,6 @@ var useItem = function(){
 	else if(Itemlistcheck[stressItem] == 15 ){
 		if(ItemList[4].number == 7){
 			showItemInformation("没错，我想起来了。这就是Florent的项链。用这根线把之前的珍珠串起来，F L O R E N T，可是Florent你现在究竟在哪里啊！");
-			ItemList[4].number = 0;
-			ItemList[14].number = 0;
 			gameStaus = 4;
 			getItem([[4,-7],[14,-1],[15,1]]);
 		}
