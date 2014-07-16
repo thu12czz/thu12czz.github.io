@@ -2167,7 +2167,7 @@ var investigate = {
 					}
 					else{
 						if(ItemList[15].number){
-							ending(3);
+							alert("恭喜通关游戏，达成true end");
 						}
 						else{
 							if(this.Staus == 0){

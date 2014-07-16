@@ -177,10 +177,10 @@ var useItem = function(){
 	}
 	else if(Itemlistcheck[stressItem] == 14 && targe == 5 && currentmap == 7){
 		if(ItemList[15].number){
-			ending(2);
+			alert("恭喜通关游戏，达成NORMAL END");
 		}
 		else{
-			ending(1);
+			alert("恭喜通关游戏，达成BAD END");
 		}
 	}
 	else if(Itemlistcheck[stressItem] == 15 ){
