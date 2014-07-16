@@ -1852,23 +1852,23 @@ var investigate = {
 							this.Staus = 2;	
 							showInformation("那么我们来做一个交易吧，如果你把你手上的镜子碎片都给我，那么我就给你这个房间的钥匙如何？");
 						}
-						else if(this.Staus == 3){
+						else if(this.Staus == 2){
 							getChoose("好","不用了")
 						}
-						else if(this.Staus == 4){
+						else if(this.Staus == 3){
 							showInformation("我就知道你会的….哼哼哼，多谢了。");
-							this.Staus = 6;
+							this.Staus = 5;
 						}
-						else if(this.Staus == 5)
+						else if(this.Staus == 4)
 						{
 							showInformation("你再好好想想吧。");
-							this.Staus = 7;
+							this.Staus = 6;
 						}
-						else if(this.Staus == 6){
+						else if(this.Staus == 5){
 							this.flag = 1 ;
 							clearinfomation();
 							this.Staus = 0;
-							getItem([[2,0]])
+							getItem([[2,0],[13,1]])
 						}
 						else{
 							clearinfomation();
