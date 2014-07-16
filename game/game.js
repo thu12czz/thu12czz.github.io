@@ -500,10 +500,10 @@ var gameObj = (function()
 /*	开始界面对象	*/
 var startObj={
 	initialize:function(options){
-		var name="Forget";
-		var begin="按回车键开始";
-		var state1="游戏说明：方向键上下左右控制移动.";
-		var state2="z键确认/探索/使用道具,x键打开或关闭道具栏";
+		var name="";
+		var begin="";
+		var state1="";
+		var state2="";
 		this.startSrc=options.srcObj.startSrc;
 		this.text1=HTMLGame.shape.Text(name,{x:200,y:150,style:"#000",font:"bold 36px sans-serif"});
 		this.text2=HTMLGame.shape.Text(begin,{x:160,y:240,style:"#000",font:"bold 32px sans-serif"});
