@@ -37,8 +37,10 @@ var closegetItem =function()
 	{
 		closeItemList();
 		showItemList();
+		LastStaus = 3;
 	}
 	gameStaus = LastStaus;
+	LastStaus = 1;
 }
 var showItemList = function()
 {
