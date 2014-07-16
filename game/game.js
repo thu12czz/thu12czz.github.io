@@ -49,6 +49,28 @@ var player = function(options){
 	this.moveSpeed = 5;
 };
 HTMLGame.Basis.inherit(player,HTMLGame.Sprite);
+player.prototype.initialize=function()		{
+	this.addAnimation(new HTMLGame.SpriteSheet("playerDown",srcObj.player,{width:128,height:48,frameSize:[32,48],loop:true}));
+	this.addAnimation(new HTMLGame.SpriteSheet("playerLeft",srcObj.player,{width:128,height:96,frameSize:[32,48],loop:true,beginY:48}));
+	this.addAnimation(new HTMLGame.SpriteSheet("playerRight",srcObj.player,{width:128,height:144,frameSize:[32,48],loop:true,beginY:96}));
+	this.addAnimation(new HTMLGame.SpriteSheet("playerUp",srcObj.player,{width:128,height:192,frameSize:[32,48],loop:true,beginY:144}));
+}
+player.prototype.walk = function()
+{
+	console.log();
+	if(isToLeft(this)){
+		this.setCurrentAnimation("playerLeft");	
+	}
+	else if(isToRight(this)){
+		this.setCurrentAnimation("playerRight");
+	}
+	else if(isToUp(this)){
+		this.setCurrentAnimation("playerUp");	
+	}
+	else if(isToDown(this)){
+		this.setCurrentAnimation("playerDown");
+	}
+}
 
 /*获取目标方向值*/
 var getExplore = function(obj,map)
@@ -257,7 +279,9 @@ var gameObj = (function()
 			currentmap = options.mapN;
 			this.mapchange = options.mapchange;
 			this.map = new HTMLGame.Map (options.mapMatrix,{cellSize:[40,40]});
-			this.player = new player({src : srcObj.player,width: 40,height: 40,x: 40*playerPosition[0],y :40*playerPosition[1]});
+			$('#backgroundCanvas')[0].getContext('2d').drawImage(HTMLGame.pictureLoader.loadedImgs[srcObj.bgSrc],0,0,HTMLGame.width,HTMLGame.height);
+			this.player = new player({src:srcObj.playerSrc,width: 40,height: 40,x: 40*playerPosition[0],y :40*playerPosition[1]});
+			this.player.initialize();
 			HTMLGame.spriteList.add(this.player) ;
 		},
 		/*	切换地图	*/
@@ -390,7 +414,7 @@ var gameObj = (function()
 						keyLast = 0;
 					}
 				}
-				if(HTMLGame.input.isPressed("z") && LastStaus == 1 && canExplore(_player,_map) && currentItemNumber > 0)
+				else if(HTMLGame.input.isPressed("z") && LastStaus == 1 && canExplore(_player,_map) && currentItemNumber > 0)
 				{
 					if(keyLast > keyDuration)
 					{
@@ -459,12 +483,11 @@ var gameObj = (function()
 				}
 				keyLast += duration;
 			}
+			list[0].walk();
+			
 		},
-		/*	画出地图	*/
+		/*	画出实时地图	*/
 		draw:function(){
-			if(this.map){
-				HTMLGame.context.drawImage(HTMLGame.pictureLoader.loadedImgs[srcObj.bgSrc],0,0,HTMLGame.width,HTMLGame.height);
-				}
 		},
 		/*	结束游戏	*/
 		end:function(){
@@ -477,7 +500,7 @@ var gameObj = (function()
 /*	开始界面对象	*/
 var startObj={
 	initialize:function(options){
-		var name="Forget";
+		var name="逗比历险记";
 		var begin="按回车键开始";
 		var state1="游戏说明：方向键上下左右控制移动.";
 		var state2="z键确认或探索或使用道具,x键取消,c键打开或关闭道具栏";

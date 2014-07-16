@@ -7,7 +7,7 @@
 
 #item
 {
-	background-image:url(images/textbg.jpg);
+	background-image:url(images/bdtext.png);
 	position:absolute;
 	left:160px;
 	top:120px;	
@@ -33,13 +33,22 @@
 #gameCanvas
 {
 	position:absolute;
+	left:84px;
+	top:32px;
+}
+
+#backgroundCanvas
+{
+	position:absolute;
 	left:80px;
 	top:40px;
+	width:640px;
+	height:520px;
 }
 
 #information
 {
-	background-image:url(images/textbg.jpg);
+	background-image:url(images/bdtext.png);
 	position:absolute;
 	left:200px;
 	top:400px;	
@@ -79,7 +88,7 @@
 
 #prompt
 {
-	background-image:url(images/textbg.jpg);
+	background-image:url(images/bdtext.png);
 	position:absolute;
 	left:320px;
 	top:300px;	
@@ -109,7 +118,7 @@
 
 #Iteminformation
 {
-	background-image:url(images/textbg.jpg);
+	background-image:url(images/bdtext.png);
 	position:absolute;
 	left:200px;
 	top:400px;	
@@ -133,8 +142,8 @@
 </style>
 </head>
 <div id="wrap">
-<canvas id="gameCanvas">
-</canvas>
+<canvas id="backgroundCanvas" height="520" width="640"></canvas>
+<canvas id="gameCanvas"></canvas>
 <div id = 'item'>
 	<table id = 'itemtable'>
 		<tr>

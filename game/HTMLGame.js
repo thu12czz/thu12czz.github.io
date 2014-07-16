@@ -1034,11 +1034,11 @@ HTMLGame.NewSpace("HTMLGame", function(argu)
 		**/
 		setCurrentAnimation:function(id){//可传入id或spriteSheet
 			if(!this.isCurrentAnimation(id)){
-				if(argu.Basis.isString(id)){
+				if(typeof(id) == 'string'){
 					this.spriteSheet=this.spriteSheetList[id];
 					this.image=this.imgX=this.imgY=undefined;
 				}
-				else if(argu.Basis.isObject(id)){
+				else if(typeof(id) == 'object'){
 					this.spriteSheet=id;
 					this.addAnimation(id);
 					this.image=this.imgX=this.imgY=undefined;
@@ -1050,10 +1050,10 @@ HTMLGame.NewSpace("HTMLGame", function(argu)
 		 *判断当前动画是否为该id的动画
 		**/
 		isCurrentAnimation:function(id){
-			if(argu.Basis.isString(id)){
+			if(typeof(id) == 'string'){
 				return (this.spriteSheet&&this.spriteSheet.id===id);
 			}
-			else if(argu.Basis.isObject(id)){
+			else if(typeof(id) == 'object'){
 				return this.spriteSheet===id;
 			}
 		},

@@ -1,8 +1,8 @@
 var clearinfomation = function()
 {
 	$('#information').attr('style','opacity:0;')
-	gameStaus = 1;
 	$('#information').empty();
+	gameStaus = 1;
 }
 
 var showInformation = function(inf)
@@ -1795,7 +1795,7 @@ var investigate = {
 						else if(this.Staus == 4){
 							showInformation("我就知道你会的….哼哼哼，多谢了。");
 							this.Staus = 6;
-							getItem([[2,0]]);
+							getItem([[2,0]])
 						}
 						else if(this.Staus == 5)
 						{

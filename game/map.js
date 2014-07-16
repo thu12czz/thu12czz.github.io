@@ -20,7 +20,7 @@ var map1={
 	/* 地图矩阵：0.空地 1.阻挡物品 2.打开的门 >4.可探查物品*/
 	srcObj:{
 		bgSrc:"images/map/map1_groundfloor_storage.jpg",
-		player:"images/player1.png",
+		player:"images/player.png",
 			},
 	mapchange:[
 	{
@@ -51,7 +51,7 @@ var map2={
 	mapN : 2 ,
 	srcObj:{
 		bgSrc:	"images/map/map2_groundfloor_inidleroom.jpg",
-		player:"images/player1.png",
+		player:"images/player.png",
 			},
 	mapchange:[
 	{
@@ -100,7 +100,7 @@ var map3={
 	],
 	srcObj:{
 		bgSrc:	"images/map/map3_groundfloor_passage.jpg",
-		player:"images/player1.png",
+		player:"images/player.png",
 			},
 	mapMatrix:[
 					[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
@@ -124,7 +124,7 @@ var map4={
 	mapN : 4 ,
 	srcObj:{
 		bgSrc:	"images/map/map4_firstfloor_rightpassage.jpg",
-		player:"images/player1.png",
+		player:"images/player.png",
 			},
 	mapchange:
 	[
@@ -181,7 +181,7 @@ var map5={
 	mapN : 5 ,
 	srcObj:{
 		bgSrc:	"images/map/map5_firstfloor_guestroom.jpg",
-		player:"images/player1.png",
+		player:"images/player.png",
 			},
 	mapchange:
 	[
@@ -213,7 +213,7 @@ var map6={
 	mapN : 6 ,
 	srcObj:{
 		bgSrc:	"images/map/map6_firstfloor_study.jpg",
-		player:"images/player1.png",
+		player:"images/player.png",
 			},
 	mapchange:
 	[
@@ -245,7 +245,7 @@ var map7={
 	mapN : 7 ,
 	srcObj:{
 		bgSrc:	"images/map/map7_firstfloor_hallway.jpg",
-		player:"images/player1.png",
+		player:"images/player.png",
 			},
 	mapchange:
 	[
@@ -282,7 +282,7 @@ var map8={
 	mapN : 8 ,
 	srcObj:{
 		bgSrc:	"images/map/map8_firstfloor_saloon.jpg",
-		player:"images/player1.png",
+		player:"images/player.png",
 			},
 	mapchange:
 	[
@@ -319,7 +319,7 @@ var map9={
 	mapN : 9 ,
 	srcObj:{
 		bgSrc:	"images/map/map9_firstfloor_diningroom.jpg",
-		player:"images/player1.png",
+		player:"images/player.png",
 			},
 	mapchange:
 	[
@@ -361,7 +361,7 @@ var map10={
 	mapN : 10 ,
 	srcObj:{
 		bgSrc:"images/map/map10_firstfloor_kitchen.jpg",
-		player:"images/player1.png",
+		player:"images/player.png",
 			},
 	mapchange:
 	[
@@ -403,7 +403,7 @@ var map11={
 	mapN : 11 ,
 	srcObj:{
 		bgSrc:"images/map/map11_firstfloor_dustladenroom.jpg",
-		player:"images/player1.png",
+		player:"images/player.png",
 			},
 	mapchange:
 	[
@@ -435,7 +435,7 @@ var map12={
 	mapN : 12 ,
 	srcObj:{
 		bgSrc:"images/map/map12_firstfloor_passage.jpg",
-		player:"images/player1.png",
+		player:"images/player.png",
 			},
 	mapchange:
 	[
@@ -477,7 +477,7 @@ var map13={
 	mapN : 13 ,
 	srcObj:{
 		bgSrc:"images/map/map13_secondfloor_hall.jpg",
-		player:"images/player1.png",
+		player:"images/player.png",
 			},
 	mapchange:
 	[
@@ -519,7 +519,7 @@ var map14={
 	mapN : 14 ,
 	srcObj:{
 		bgSrc:"images/map/map14_secondfloor_bedroom.jpg",
-		player:"images/player1.png",
+		player:"images/player.png",
 			},
 	mapchange:
 	[
@@ -551,7 +551,7 @@ var map15={
 	mapN : 15 ,
 	srcObj:{
 		bgSrc:"images/map/map15_secondfloor_room.jpg",
-		player:"images/player1.png",
+		player:"images/player.png",
 			},
 	mapchange:
 	[
