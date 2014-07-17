@@ -1138,7 +1138,7 @@ var investigate = {
 				check: function(){
 					if(this.Staus == 0){
 						this.Staus = 1;	
-						showInformation("墙上挂着一个老式时钟….我看看时间，嗯，现在是10点40.");
+						showInformation("墙上挂着一个老式时钟…但是已经停了。嗯，时间停在了10点40.");
 					}
 					else{
 						clearinfomation();
