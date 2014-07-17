@@ -2,15 +2,23 @@
 
 
 var propList=[]
-var gameStaus=0;/*游戏状态参数，1为正常行走，2为探索物品，3为选择状态，4为打开道具栏，5为探索物品的同时打开道具栏*/
-var playerPosition=[2,10];
-var targe;
+var gameStaus=0; /*游戏状态参数，1为正常行走，2为探索物品，3为选择状态，4为打开道具栏，5为探索物品的同时打开道具栏*/
+var playerPosition=[2,10];   /*玩家的出现坐标*/
+var targe;                 /*玩家面对的物品的值*/
 
-var startGame=
+var startGame=            /*初始界面*/
 {
 	mapN:"start",
 	srcObj:{
 		startSrc:"images/start.jpg"
+	}
+}
+
+var GameEnd=            /*结局界面*/
+{
+	mapN:"end",
+	srcObj:{
+		endSrc:"images/END.jpg"
 	}
 }
 
@@ -22,14 +30,14 @@ var map1={
 		bgSrc:"images/map/map1_groundfloor_storage.jpg",
 		player:"images/player.png",
 			},
-	mapchange:[
+	mapchange:[                            /*地图的切换位置*/
 	{
 		leavepostion:[4,4],
 		newmap:3,
 		newposition:[3,6]
 		}
 	],
-	mapMatrix:[
+	mapMatrix:[                                        /*地图的信息矩阵，0代表平底，1代表障碍物，2代表门，>3表示会触发事件*/
 					[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
 					[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
 					[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
@@ -38,9 +46,9 @@ var map1={
 					[1,1,1,0,0,0,0,6,1,1,1,1,1,12,1,1],
 					[1,1,0,0,0,10,0,0,0,0,0,0,0,0,1,1],
 					[1,1,1,1,1,1,1,1,0,0,0,0,0,5,1,1],
-					[1,1,1,1,1,1,1,1,0,0,0,11,0,1,1,1],
-					[1,1,0,0,0,0,0,0,0,0,0,1,1,1,1,1],
-					[1,1,0,0,0,0,1,4,0,0,0,0,0,8,1,1],
+					[1,1,1,1,1,1,13,1,0,0,0,11,0,1,1,1],
+					[1,1,0,0,0,0,0,0,0,0,0,13,1,1,1,1],
+					[1,1,0,0,0,0,13,4,0,0,0,0,0,8,1,1],
 					[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
 					[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
 				   ],
@@ -593,4 +601,5 @@ MapManager.add(map12, gameObj);
 MapManager.add(map13, gameObj);
 MapManager.add(map14, gameObj);
 MapManager.add(map15, gameObj);
+MapManager.add(GameEnd, EndObj);
 MapManager.startMap("start");//开始界面

@@ -1,11 +1,13 @@
-var stressItem = 0 ;
-var currentItemNumber = 0 ;
-var mirrorFlag = false;
-var Itemlistcheck = [0,0,0,0,
+/*道具数据*/
+
+var stressItem = 0 ;   			/*选中道具*/
+var currentItemNumber = 0 ;		/*已有道具数*/
+var mirrorFlag = false;			/*某个剧情参数*/
+var Itemlistcheck = [0,0,0,0,   /*道具栏矩阵*/
 					0,0,0,0,
 					0,0,0,0,
 					0,0,0,0];	
-var getItem = function(NUM)
+var getItem = function(NUM)       /*道具数量变化的提示*/
 {
 	var len = NUM.length
 	for(var i = 0 ;i<len;i++)
@@ -29,7 +31,7 @@ var getItem = function(NUM)
 	gameStaus = 5;
 } 
 
-var closegetItem =function()
+var closegetItem =function()      /*关闭上述提示框*/
 {
 	$('#prompt').attr('style','opacity:0;');
 	$('#prompt').empty();
@@ -45,7 +47,7 @@ var closegetItem =function()
 		LastStaus = 1
 	};
 }
-var showItemList = function()
+var showItemList = function()      /*打开道具栏*/
 {
 	$('#item').attr('style','opacity:1;');
 	for(var i = 0 ; i < ItemList.length ; i++)
@@ -65,7 +67,7 @@ var showItemList = function()
 	}
 }
 
-var stressedThisItem = function()
+var stressedThisItem = function()       /*展示选定道具的信息*/
 {
 	stressItem = stressItem % currentItemNumber;
 	$('#item').find('td').removeAttr('class'); 
@@ -73,7 +75,7 @@ var stressedThisItem = function()
 	showItemInformation(ItemList[Itemlistcheck[stressItem] - 1].description);
 }
 
-var closeItemList = function()
+var closeItemList = function()          /*关闭道具栏*/
 {
 	currentItemNumber = 0 ;
 	stressItem = 0;
@@ -82,21 +84,21 @@ var closeItemList = function()
 	clearIteminfomation();
 }
 
-var clearIteminfomation = function()
+var clearIteminfomation = function()      /*关闭道具信息按钮*/
 {
 	$('#Iteminformation').attr('style','opacity:0;')
 	gameStaus = 1;
 	$('#Iteminformation').empty();
 }
 
-var showItemInformation = function(inf)
+var showItemInformation = function(inf)    /*显示道具信息*/
 {
 	$('#Iteminformation').attr('style','opacity:1;')
 	$('#Iteminformation').empty();
 	$('#Iteminformation').append('<p>' + inf+ '</p>');
 }
 
-var useItem = function(){
+var useItem = function(){                     /*使用道具的事件函数*//*下面的代码都是剧情事件*/
 	if(Itemlistcheck[stressItem]  == 1 && targe == 6 && currentmap == 1){
 		showItemInformation("向瓶子里灌满了水。");
 		Itemchangetest=[];
@@ -131,8 +133,7 @@ var useItem = function(){
 			mirrorFlag = true;
 			gameStaus = 4;
 			getItem([[2,-4],[12,-1]]);
-			investigate.map[15].mapevent[3].flag = 1;
-			
+			investigate.map[14].mapevent[3].flag = 2;
 		}
 		else{
 			showItemInformation("看起来这些碎片应该是这个镜子的。不过，貌似缺了一点什么。");
@@ -143,9 +144,6 @@ var useItem = function(){
 			showItemInformation("用水清洗了一下手镯...没想到这个手镯原来这么漂亮啊，这一定很值钱！");
 			gameStaus = 4;
 			getItem([[5,-1],[11,1]]);
-		}
-		else{
-			return;
 		}
 	}
 	else if(Itemlistcheck[stressItem] == 9 && targe == 4 && currentmap == 8){
@@ -176,105 +174,106 @@ var useItem = function(){
 		}
 	}
 	else if(Itemlistcheck[stressItem] == 14 && targe == 5 && currentmap == 7){
-		if(ItemList[15].number){
-			alert("恭喜通关游戏，达成NORMAL END");
+		closeItemList();
+		if(ItemList[15].number > 0){
+			gameEnd = 2;
+			gameStaus = 8;
 		}
 		else{
-			alert("恭喜通关游戏，达成BAD END");
+			gameEnd = 1;
+			gameStaus = 8;
 		}
+		investigate.end.check();
 	}
 	else if(Itemlistcheck[stressItem] == 15 ){
 		if(ItemList[4].number == 7){
 			showItemInformation("没错，我想起来了。这就是Florent的项链。用这根线把之前的珍珠串起来，F L O R E N T，可是Florent你现在究竟在哪里啊！");
 			gameStaus = 4;
-			getItem([[4,-7],[14,-1],[15,1]]);
+			getItem([[4,-7],[14,1],[15,1]]);
 		}
 	}
 }
-
-
-
-
+/*道具信息*/
 var ItemList = [
-		{
-			name: "空瓶子",
-			description: "空空的玻璃瓶子，似乎可以装一些水。",
-			number: 0
-		},
-		{
-			name: "装水的瓶子",
-			description: "装满了水的瓶子，应该可以用来做点什么。",
-			number: 0
-		},
-		{
-			name: "镜子碎片",
-			description: "看起来是一面镜子的碎片，似乎很锋利，小心不要割到手了。",
-			number: 0
-		},
-		{
-			name: "古老的钥匙",
-			description: "一枚古老的钥匙，看起来可以打开这扇门。",
-			number: 0
-		},
-		{
-			name: "珍珠",
-			description: "璀璨夺目的珍珠，它的光芒似乎在闪耀。仔细一看，每个珍珠上还刻着一个字母。",
-			number: 0
-		},
-		{
-			name: "被红酒染污的手镯",
-			description: "被红酒染污的手镯....不知道它原来好不好看，反正现在挺难看的。",
-			number: 0
-		},
-		{
-			name: "黄色的钥匙",
-			description: "一枚黄色的钥匙，尺寸很小，应该不是用来开门的。",
-			number: 0
-		},
-		{
-			name: "铜色的钥匙",
-			description: "铜色的钥匙，应该可以用来打开一扇门。不过到底是哪一扇呢？",
-			number: 0
-		},
-		{
-			name: "机械发条",
-			description: "一根发条，看起来是某个机械的部件。如果没有了这根发条，我想那个机械就不能正常运转了吧。",
-			number: 0
-		},
-		{
-			name: "餐厅的钥匙",
-			description: "一枚普通的钥匙，用来打开餐厅的门，嗯，不会有错的。",
-			number: 0
-		},
-		{
-			name: "螺丝刀",
-			description: "一把做工精致的螺丝刀，手把上还绑了防滑手胶。",
-			number: 0
-		},
-		{
-			name: "闪闪发光的手镯",
-			description: "这是刚才的那个手镯吗....看起来太漂亮了！",
-			number: 0
-		},
-		{
-			name: "粘合剂",
-			description: "一瓶粘合剂，应该可以把某些破碎的东西复原。",
-			number: 0
-		},
-		{
-			name: "大门钥匙",
-			description: "打开玄关那扇大门的钥匙，用了这个就能从这里离开了吧。",
-			number: 0
-		},
-		{
-			name: "线",
-			description: "一条很细的线，应该可以把那些东西串起来了。",
-			number: 0
-		},
-		{
-			name: "珍珠项链",
-			description: "一串璀璨夺目的珍珠项链，上面铭刻着：FLORENT",
-			number: 0
-		}
-	]
+	{
+		name: "空瓶子",
+		description: "空空的玻璃瓶子，似乎可以装一些水。",
+		number: 0
+	},
+	{
+		name: "装水的瓶子",
+		description: "装满了水的瓶子，应该可以用来做点什么。",
+		number: 0
+	},
+	{
+		name: "镜子碎片",
+		description: "看起来是一面镜子的碎片，似乎很锋利，小心不要割到手了。",
+		number: 0
+	},
+	{
+		name: "古老的钥匙",
+		description: "一枚古老的钥匙，看起来可以打开这扇门。",
+		number: 0
+	},
+	{
+		name: "珍珠",
+		description: "璀璨夺目的珍珠，它的光芒似乎在闪耀。仔细一看，每个珍珠上还刻着一个字母。",
+		number: 0
+	},
+	{
+		name: "被红酒染污的手镯",
+		description: "被红酒染污的手镯....不知道它原来好不好看，反正现在挺难看的。",
+		number: 0
+	},
+	{
+		name: "黄色的钥匙",
+		description: "一枚黄色的钥匙，尺寸很小，应该不是用来开门的。",
+		number: 0
+	},
+	{
+		name: "铜色的钥匙",
+		description: "铜色的钥匙，应该可以用来打开一扇门。不过到底是哪一扇呢？",
+		number: 0
+	},
+	{
+		name: "机械发条",
+		description: "一根发条，看起来是某个机械的部件。如果没有了这根发条，我想那个机械就不能正常运转了吧。",
+		number: 0
+	},
+	{
+		name: "餐厅的钥匙",
+		description: "一枚普通的钥匙，用来打开餐厅的门，嗯，不会有错的。",
+		number: 0
+	},
+	{
+		name: "螺丝刀",
+		description: "一把做工精致的螺丝刀，手把上还绑了防滑手胶。",
+		number: 0
+	},
+	{
+		name: "闪闪发光的手镯",
+		description: "这是刚才的那个手镯吗....看起来太漂亮了！",
+		number: 0
+	},
+	{
+		name: "粘合剂",
+		description: "一瓶粘合剂，应该可以把某些破碎的东西复原。",
+		number: 0
+	},
+	{
+		name: "大门钥匙",
+		description: "打开玄关那扇大门的钥匙，用了这个就能从这里离开了吧。",
+		number: 0
+	},
+	{
+		name: "线",
+		description: "一条很细的线，应该可以把那些东西串起来了。",
+		number: 0
+	},
+	{
+		name: "珍珠项链",
+		description: "一串璀璨夺目的珍珠项链，上面铭刻着：FLORENT",
+		number: 0
+	}
+]
 	

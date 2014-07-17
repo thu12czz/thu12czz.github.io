@@ -1,20 +1,23 @@
-var mypassword = '';
+/*地图事件数据*/
 
-var clearinfomation = function()
+var mypassword = '';     /*密码的值*/
+var gameEnd = 0;         /*结局参数*/
+
+var clearinfomation = function()         /*清空对话信息*/
 {
 	$('#information').attr('style','opacity:0;')
 	$('#information').empty();
 	gameStaus = 1;
 }
 
-var showInformation = function(inf)
+var showInformation = function(inf)          /*显示对话信息*/
 {
 	$('#information').attr('style','opacity:1;')
 	$('#information').empty();
 	$('#information').append('<p>' + inf+ '</p>');
 }
 
-var getChoose = function(inf1,inf2)
+var getChoose = function(inf1,inf2)           /*显示选项*/
 {
 	$('#information').attr('style','opacity:1;')
 	$('#information').empty();
@@ -23,7 +26,7 @@ var getChoose = function(inf1,inf2)
 	$('#information').find('p:eq(0)').attr('class','information1');
 }
 
-var changeinformation = function()
+var changeinformation = function()                /*改变选项*/
 {
 	redinfomation = $('#information').find('.information1');
 	redinfomation.removeAttr('class'); 
@@ -32,13 +35,13 @@ var changeinformation = function()
 }
 
 
-var submitPassword = function()
+var submitPassword = function()                      /*获取密码*/
 {
 	var inPass = document.getElementById("password").value;
 	return inPass;
 }
 
-var checkForm = function()
+var checkForm = function()                        /*密码的输入限制*/
 {
 	if((event.keyCode >= 48)&&(event.keyCode <= 57)&&(document.getElementById("password").value.length <= 3))
 	{
@@ -49,21 +52,156 @@ var checkForm = function()
 	}
 }
 
-var showPassDiv = function()
+var showPassDiv = function()                           /*显示密码输入框*/
 {
 	$('#inputPassword').attr('style','opacity:1;');
 	gameStaus = 6;
 }
 
-var getPassWord = function()
+var getPassWord = function()                       /*关闭密码输入框，并获取密码*/
 {
 	gameStaus = 2;
 	$('#inputPassword').attr('style','opacity:0;');
 	return submitPassword();
 }
-
-
+ 
+ /*以下都是地图事件的逻辑判断函数*/                          
 var investigate = {
+	start:{
+		Staus: 0,
+		check: function(){
+			if(this.Staus == 0){
+				showInformation("这是哪儿….我怎么会在这里………头好疼，完全想不起来……");
+				this.Staus ++;
+			}
+			else if(this.Staus == 1){
+				showInformation("看起来这里是一个仓库，总之，先从这里逃出去吧。");
+				this.Staus ++;
+			}
+			else {
+				clearinfomation();
+			}
+		}
+	},
+	end:{
+		Staus: 0,
+		check:function(){
+			if(gameEnd == 1){
+				if(this.Staus == 0){
+					showInformation("门开了，这样就行了吧….终于能离开这里了，外面是一个大晴天呢….");
+					this.Staus ++;
+				}
+				else if(this.Staus == 1){
+					showInformation("虽然话是这么说，但是总觉得心里还是有什么放不下。不过无所谓了，既然已经逃出来了，过去的就让他过去吧……….");
+					this.Staus ++;
+				}
+				else {
+					clearinfomation();
+					showInformation("THE END");
+					gameStaus = 9;
+				}
+			}
+			else if(gameEnd == 2){
+				if(this.Staus == 0){
+					showInformation("已经找遍了这个屋子了，但是还是没有Florent你的踪影。");
+					this.Staus ++;
+				}
+				else if(this.Staus == 1){
+					showInformation("门开了，这里也没有什么可以留恋的了。只有有你的地方，才会是我的归宿。Florent，哪怕是走遍天涯海角，我也一定会找到你的。");
+					this.Staus ++;
+				}
+				else {
+					clearinfomation();
+					showInformation("THE END");
+					gameStaus = 9;
+				}
+			}
+			else if(gameEnd == 3){
+				if(this.Staus == 0){
+					showInformation("珍珠项链在发光！");
+					this.Staus ++;
+				}
+				else if(this.Staus == 1){
+					showInformation("（当我再次睁开的时候，她的身影出现在了镜子的另一侧）");
+					MapManager.startMap('end');
+					this.Staus ++;
+				}
+				else if(this.Staus == 2){
+					showInformation("Florent，是，是你吗？");
+					this.Staus ++;
+				}
+				else if(this.Staus == 3){
+					showInformation("你，你怎么会在镜子里面？");
+					this.Staus ++;
+				}
+				else if(this.Staus == 4){
+					showInformation("看来你已经忘记了啊。一个月前的那场事故里，我就离开了你。");
+					this.Staus ++;
+				}
+				else if(this.Staus == 5){
+					showInformation("怎，怎么会？为什么我完全记不起来了。");
+					this.Staus ++;
+				}
+				else if(this.Staus == 6){
+					showInformation("一个月以来，我一直在你身边注视着你。看着你如此低落，我也一直都很难过。但是已死之人是无法干涉生者的世界的。");
+					this.Staus ++;
+				}
+				else if(this.Staus == 7){
+					showInformation("直到你翻阅了那本书，设置了这个仪式，以你一部分的记忆为代价，把我再次召唤回了这个世界。");
+					this.Staus ++;
+				}
+				else if(this.Staus == 8){
+					showInformation("这个仪式还没有完成的时候，你的一部分记忆就消逝了，不过虽然没有完全完成，但是我也获得了一些干涉这个世界的能力，");
+					this.Staus ++;
+				}
+				else if(this.Staus == 9){
+					showInformation("于是我制作了那些纸片和小熊，提示你继续完成这个仪式。");
+					this.Staus ++;
+				}
+				else if(this.Staus == 10){
+					showInformation("既然这个仪式完成了，那么，请你不要再离开我了，好吗？");
+					this.Staus ++;
+				}
+				else if(this.Staus == 11){
+					showInformation("你还记得这个仪式的作用吗？它仅仅能让你和我再见一面，但是人死是不能复生的。");
+					this.Staus ++;
+				}
+				else if(this.Staus == 12){
+					showInformation("可是，如果没有你，我根本活不下去！等等我，我会追随你而去的。");
+					this.Staus ++;
+				}
+				else if(this.Staus == 13){
+					showInformation("不，你要好好活下去。你知道我最大的心愿是什么吗？就是希望你能幸福的继续活下去。");
+					this.Staus ++;
+				}
+				else if(this.Staus == 14){
+					showInformation("可是，我….");
+					this.Staus ++;
+				}
+				else if(this.Staus == 15){
+					showInformation("时间似乎不多了，我要回到我该去的地方了。记住，你一定要好好活下去，连同我的那份一起，去实现我们当初的诺言…..");
+					this.Staus ++;
+				}
+				else if(this.Staus == 16){
+					showInformation("Florent！Florent!Flor………….");
+					this.Staus ++;
+				}
+				else if(this.Staus == 17){
+					showInformation("……………");
+					this.Staus ++;
+				}
+				else if(this.Staus == 18){
+					showInformation("我….要坚强……为了她…….我也要努力的……….活下去!");
+					this.Staus ++;
+				}
+				else {
+					clearinfomation();
+					showInformation("THE END");
+					gameStaus = 9;
+				}
+			}
+		}
+	},
 	map:[
 		//地图0: 地下一层-仓库
 		{
@@ -73,103 +211,103 @@ var investigate = {
 				flag: 0,
 				Staus: 0,
 				check: function(){
-						if(this.flag == 0){
-							if(this.Staus == 0){
-								showInformation("地板上摆放着一些空瓶子，要拿走一个吗？");
-								this.Staus = 1;
-							}
-							else if(this.Staus == 1){
-								getChoose("带走一个吧","算了")
-							}
-							else if(this.Staus == 2){
-								this.Staus = 0;
-								clearinfomation();
-								this.flag ++;
-								getItem([[0,1]]);
-							}
-							else{
-								this.Staus = 0;
-								clearinfomation()
-							}
+					if(this.flag == 0){
+						if(this.Staus == 0){
+							showInformation("地板上摆放着一些空瓶子，要拿走一个吗？");
+							this.Staus = 1;
+						}
+						else if(this.Staus == 1){
+							getChoose("带走一个吧","算了")
+						}
+						else if(this.Staus == 2){
+							this.Staus = 0;
+							clearinfomation();
+							this.flag ++;
+							getItem([[0,1]]);
 						}
 						else{
-							if(this.Staus == 0) {
-								this.Staus = 1;
-								showInformation("地上摆着几个空瓶子。");
-							}
-							else{
-								this.Staus = 0;
-								clearinfomation();
-							}
+							this.Staus = 0;
+							clearinfomation()
 						}
 					}
+					else{
+						if(this.Staus == 0) {
+							this.Staus = 1;
+							showInformation("地上摆着几个空瓶子。");
+						}
+						else{
+							this.Staus = 0;
+							clearinfomation();
+						}
+					}
+				}
 			},
 			{
 				name: "碎片",
 				flag: 0,
 				Staus: 0,
 				check: function(){
-						if(this.flag == 0){
-							if(this.Staus == 0){
-								showInformation("地上散落着一些碎片，看样子是玻璃的碎片。嗯，还是不要管了，扎伤手就不好了。");
-								this.Staus = 1
-							}
-							else{	
-							    clearinfomation();
-								this.flag = 1;
-								this.Staus = 0;
-							}
+					if(this.flag == 0){
+						if(this.Staus == 0){
+							showInformation("地上散落着一些碎片，看样子是玻璃的碎片。嗯，还是不要管了，扎伤手就不好了。");
+							this.Staus = 1
 						}
-						else if(this.flag == 1){
-							if(this.Staus == 0){
-								showInformation("地上散落着一些碎片，应该是玻璃的碎片吧。嗯？这一块看起来好奇怪。似乎是镜子的碎片……..");
-								this.Staus = 1
-							}
-							else{	
-							    clearinfomation();
-								this.flag = 2;
-								this.Staus = 0;
-								getItem([[2,1]]);
-							}
-						}
-						else{
-							if(this.Staus == 0){
-								this.Staus = 1;
-								showInformation("地上散落着一些碎片，嗯，现在应该都是玻璃碎片了，没什么奇怪的。");
-							}
-							else{
-								clearinfomation();
-								this.Staus = 0;
-							}
+						else{	
+						    clearinfomation();
+							this.flag = 1;
+							this.Staus = 0;
 						}
 					}
+					else if(this.flag == 1){
+						if(this.Staus == 0){
+							showInformation("地上散落着一些碎片，应该是玻璃的碎片吧。嗯？这一块看起来好奇怪。似乎是镜子的碎片……..");
+							this.Staus = 1
+						}
+						else{	
+						    clearinfomation();
+							this.flag = 2;
+							this.Staus = 0;
+							getItem([[2,1]]);
+						}
+					}
+					else{
+						if(this.Staus == 0){
+							this.Staus = 1;
+							showInformation("地上散落着一些碎片，嗯，现在应该都是玻璃碎片了，没什么奇怪的。");
+						}
+						else{
+							clearinfomation();
+							this.Staus = 0;
+						}
+					}
+				}
 			},
 			{
 				name: "盆",
 				flag: 0,
 				Staus: 0,
 				check: function(){
-						if(this.flag == 0){
-							if(this.Staus == 0){
-								this.Staus = 1;
-								showInformation("盆里的水看起来很清澈，应该可以饮用.");
-							}
-							else{
-								clearinfomation();
-								this.Staus = 0;
-							}
+					if(this.flag == 0){
+						if(this.Staus == 0){
+							this.Staus = 1;
+							showInformation("盆里的水看起来很清澈，应该可以饮用.");
 						}
 						else{
-							if(this.Staus == 0){
-								this.Staus = 1;
-								showInformation("盆里的水看起来很清澈.");
-							}
-							else{
-								clearinfomation();
-								this.Staus = 0;
-							}
+							clearinfomation();
+							this.Staus = 0;
 						}
 					}
+					else{
+						if(this.Staus == 0){
+							this.Staus = 1;
+							showInformation("盆里的水看起来很清澈.");
+						}
+						else{
+							clearinfomation();
+							this.Staus = 0;
+						}
+					}
+				}
 			},
 			{
 				name: "墙上的纸片",
@@ -191,194 +329,208 @@ var investigate = {
 				flag: 0,
 				Staus: 0,
 				check: function(){
-						if(this.flag == 0){
-							if(this.Staus == 0){
-								this.Staus = 1;
-								showInformation("渴，渴。我好渴.....");
-							}
-							else{
-								clearinfomation();
-								this.Staus = 0;
-								}
-						}
-						else if(this.flag == 1){
-							if(this.Staus == 0){
-								this.Staus = 1;
-								showInformation("对了，差点忘记说谢谢了。给，你的瓶子，还给你。");
-							}
-							else if(this.Staus == 1){
-								showInformation("说完，小熊就变得一动不动….刚才它真的和我说话了吗？");
-								getItem([[0,1],[3,1]]);
-								this.Staus++;
-							}
-							else {
-								clearinfomation();
-								this.Staus = 0;
-								this.flag= 2;
-							}
+					if(this.flag == 0){
+						if(this.Staus == 0){
+							this.Staus = 1;
+							showInformation("渴，渴。我好渴.....");
 						}
 						else{
-							if(this.Staus == 0){
-								this.Staus = 1;
-								showInformation("小熊保持着沉默….");
+							clearinfomation();
+							this.Staus = 0;
 							}
-							else {
-								clearinfomation();
-								this.Staus = 0;
-							}
+					}
+					else if(this.flag == 1){
+						if(this.Staus == 0){
+							this.Staus = 1;
+							showInformation("对了，差点忘记说谢谢了。给，你的瓶子，还给你。");
+						}
+						else if(this.Staus == 1){
+							showInformation("说完，小熊就变得一动不动….刚才它真的和我说话了吗？");
+							getItem([[0,1],[3,1]]);
+							this.Staus++;
+						}
+						else {
+							clearinfomation();
+							this.Staus = 0;
+							this.flag= 2;
 						}
 					}
+					else{
+						if(this.Staus == 0){
+							this.Staus = 1;
+							showInformation("小熊保持着沉默….");
+						}
+						else {
+							clearinfomation();
+							this.Staus = 0;
+						}
+					}
+				}
 			},
 			{
 				name: "门",
 				flag: 0,
 				Staus: 0,
 				check: function(){
-						if(this.flag == 0){
-							if(ItemList[3].number > 0){
-								if(this.Staus == 0){
-									this.Staus = 1;
-									showInformation("看起来很古老的一扇门…用这把钥匙应该能打开…好的，门开了。");
-								}
-								else{
-									clearinfomation();
-									this.Staus = 0;
-									this.flag = 1;
-									map1.mapMatrix[4][4] = 2;
-								}
+					if(this.flag == 0){
+						if(ItemList[3].number > 0){
+							if(this.Staus == 0){
+								this.Staus = 1;
+								showInformation("看起来很古老的一扇门…用这把钥匙应该能打开…好的，门开了。");
 							}
 							else{
-								if(this.Staus == 0){
-									this.Staus = 1;
-									showInformation("看起来很古旧的一扇门…..虽然上锁了，但是好像可以撞开，要试试看吗？");
-								}
-								else if(this.Staus == 1){
-									getChoose("是","否")}
-								else if(this.Staus == 2){
-									this.flag = 1;
-									map1.mapMatrix[4][4] = 2;
-									investigate.map[0].mapevent[1].flag = 2;
-									investigate.map[0].mapevent[4].flag = 2;
-									clearinfomation();
-									this.Staus = 0;
-								}
-								else{
-									clearinfomation();
-									this.Staus = 0;
-								}
+								clearinfomation();
+								this.Staus = 0;
+								this.flag = 1;
+								map1.mapMatrix[4][4] = 2;
+							}
+						}
+						else{
+							if(this.Staus == 0){
+								this.Staus = 1;
+								showInformation("看起来很古旧的一扇门…..虽然上锁了，但是好像可以撞开，要试试看吗？");
+							}
+							else if(this.Staus == 1){
+								getChoose("是","否")}
+							else if(this.Staus == 2){
+								this.flag = 1;
+								map1.mapMatrix[4][4] = 2;
+								investigate.map[0].mapevent[1].flag = 2;
+								investigate.map[0].mapevent[4].flag = 2;
+								clearinfomation();
+								this.Staus = 0;
+							}
+							else{
+								clearinfomation();
+								this.Staus = 0;
 							}
 						}
 					}
+				}
 			},
 			{
 				name: "隐藏的箱子",
 				flag: 0,
 				Staus: 0,
 				check: function(){
-						if(this.flag == 0){
-							if(this.Staus == 0){
-								this.Staus = 1;
-								showInformation("这里摆放着一个箱子，似乎可以打开。要打开看看么？");
-							}
-							else if(this.Staus == 1){
-								getChoose("打开看看吧","还是算了");
-							}
-							else if(this.Staus == 2){
-								showInformation("里面是空的。");
-								this.Staus =4;
-							}
-							else if(this.Staus == 3){
-								clearinfomation();
-								this.Staus = 0;
-							}
-							else
-							{
-								this.flag = 1;
-								this.Staus =0;
-								clearinfomation();
-							}
+					if(this.flag == 0){
+						if(this.Staus == 0){
+							this.Staus = 1;
+							showInformation("这里摆放着一个箱子，似乎可以打开。要打开看看么？");
 						}
-						else{
-							if(this.Staus == 0){
-								this.Staus = 1;
-								showInformation("这里放着一个箱子，里面空空如也");
-							}
-							else{
-								clearinfomation();
-								this.Staus = 0;
-							}
+						else if(this.Staus == 1){
+							getChoose("打开看看吧","还是算了");
+						}
+						else if(this.Staus == 2){
+							showInformation("里面是空的。");
+							this.Staus =4;
+						}
+						else if(this.Staus == 3){
+							clearinfomation();
+							this.Staus = 0;
+						}
+						else
+						{
+							this.flag = 1;
+							this.Staus =0;
+							clearinfomation();
 						}
 					}
+					else{
+						if(this.Staus == 0){
+							this.Staus = 1;
+							showInformation("这里放着一个箱子，里面空空如也");
+						}
+						else{
+							clearinfomation();
+							this.Staus = 0;
+						}
+					}
+				}
 			},
 			{
 				name: "地上的纸片",
 				flag: 0,
 				Staus: 0,
 				check: function(){
-						if(this.flag == 0){
-							if(this.Staus == 0){
-								this.Staus = 1;
-								showInformation("所谓记忆，即是第二次的体验。");
-							}
-							else{
-								clearinfomation();
-								this.Staus = 0;
-								this.flag = 1;
-							}
+					if(this.flag == 0){
+						if(this.Staus == 0){
+							this.Staus = 1;
+							showInformation("所谓记忆，即是第二次的体验。");
 						}
 						else{
-							if(this.Staus == 0){
-								this.Staus = 1;
-								showInformation("璀璨的七子之光于手中闪耀之时，方能开启尘封的回忆。");
-							}
-							else{
-								clearinfomation();
-								this.Staus = 0;
-								this.flag = 1;
-							}
+							clearinfomation();
+							this.Staus = 0;
+							this.flag = 1;
 						}
 					}
+					else{
+						if(this.Staus == 0){
+							this.Staus = 1;
+							showInformation("璀璨的七子之光于手中闪耀之时，方能开启尘封的回忆。");
+						}
+						else{
+							clearinfomation();
+							this.Staus = 0;
+							this.flag = 1;
+						}
+					}
+				}
 			},
 			{
 				name: "抽屉柜",
 				flag: 0,Staus: 0,
 				check: function(){
-						if(this.flag == 0){
-							if(ItemList[4].number == 7){
-								if(this.Staus == 0){
-									this.Staus = 1;
-									showInformation("抽屉上的灰尘都不见了！那么….打开了！……这，这是……");
-								}
-								else{
-									clearinfomation();
-									this.Staus = 0;
-									this.flag = 1;
-									getItem([[14,1]]);
-								}
+					if(this.flag == 0){
+						if(ItemList[4].number == 7){
+							if(this.Staus == 0){
+								this.Staus = 1;
+								showInformation("抽屉上的灰尘都不见了！那么….打开了！……这，这是……");
 							}
 							else{
-								if(this.Staus == 0){
-									this.Staus = 1;
-									showInformation("这个抽屉似乎很久都没有人用过了，果然，打不开。");
-								}
-								else{
-									clearinfomation();
-									this.Staus = 0;
-								}
+								clearinfomation();
+								this.Staus = 0;
+								this.flag = 1;
+								getItem([[14,1]]);
 							}
 						}
 						else{
 							if(this.Staus == 0){
 								this.Staus = 1;
-								showInformation("抽屉里现在是空的了。");
+								showInformation("这个抽屉似乎很久都没有人用过了，果然，打不开。");
 							}
 							else{
-									clearinfomation();
-									this.Staus = 0;
+								clearinfomation();
+								this.Staus = 0;
 							}
 						}
 					}
-			}
+					else{
+						if(this.Staus == 0){
+							this.Staus = 1;
+							showInformation("抽屉里现在是空的了。");
+						}
+						else{
+								clearinfomation();
+								this.Staus = 0;
+						}
+					}
+				}
+			},
+			{
+				name: "空箱子",
+				flag: 0,Staus: 0,
+				check: function(){
+					if(this.Staus == 0){
+						this.Staus = 1;
+						showInformation("一个放杂物的箱子，没什么有用的东西。");
+					}
+					else{
+						clearinfomation();
+						this.Staus = 0;
+					}
+				}
+			},
 			]
 		},
 		//地图1：地下一层-闲置的房间
@@ -778,8 +930,8 @@ var investigate = {
 							getItem([[2,1]]);
 						}
 						else{
-							clearinfomation();
 							this.Staus = 0;
+							clearinfomation();
 						}
 					}
 					else{
@@ -932,7 +1084,11 @@ var investigate = {
 						this.Staus ++;
 					}
 					else if(this.Staus == 5){
-						showInformation('“别急嘛，小兔子，这个节目都表演到一半了，每个节目才四分钟而已”，夜莺先生回答道。“嗯，我会耐心等的”，小兔子说完又开始和夜莺先生一起欣赏起节目了。');
+						showInformation('“别急嘛，小兔子，这个节目都表演到一半了，每个节目才四分钟而已”，夜莺先生回答道。');
+						this.Staus ++;
+					}
+					else if(this.Staus == 6){
+						showInformation('“嗯，我会耐心等的”，小兔子说完又开始和夜莺先生一起欣赏起节目了。');
 						this.Staus ++;
 					}
 					else{
@@ -1138,7 +1294,7 @@ var investigate = {
 				check: function(){
 					if(this.Staus == 0){
 						this.Staus = 1;	
-						showInformation("墙上挂着一个老式时钟…但是已经停了。嗯，时间停在了10点40.");
+						showInformation("墙上挂着一个老式时钟….我看看时间，嗯，现在是10点40.");
 					}
 					else{
 						clearinfomation();
@@ -2167,7 +2323,8 @@ var investigate = {
 					}
 					else{
 						if(ItemList[15].number){
-							alert("恭喜通关游戏，达成true end");
+							gameEnd = 3;
+							gameStaus = 8;
 						}
 						else{
 							if(this.Staus == 0){

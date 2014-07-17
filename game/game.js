@@ -1,6 +1,7 @@
 // JavaScript Document
-
-var gameStaus = 0;/*游戏状态参数，1为正常行走，2为探索物品，3为打开道具栏,4为使用道具提示,5为获得道具提示*/
+   /*这是这个游戏的核心js,部分以HTMLGame开头的函数来自HTMLgame.js*/
+   /*助教可以主要看这个文件*/
+var gameStaus = 0;/*游戏状态参数，1为正常行走，2为探索物品，3为打开道具栏,4为使用道具提示,5为获得道具提示，6,为密码输入，7为开始提示，8为结局*/
 var LastStaus = 1;
 var playerPosition=[2,10];
 var targe;
@@ -49,15 +50,15 @@ var player = function(options){
 	this.moveSpeed = 5;
 };
 HTMLGame.Basis.inherit(player,HTMLGame.Sprite);
-player.prototype.initialize=function()		{
+player.prototype.initialize=function()		{             /*人物动画*/
 	this.addAnimation(new HTMLGame.SpriteSheet("playerDown",srcObj.player,{width:128,height:48,frameSize:[32,48],loop:true}));
 	this.addAnimation(new HTMLGame.SpriteSheet("playerLeft",srcObj.player,{width:128,height:96,frameSize:[32,48],loop:true,beginY:48}));
 	this.addAnimation(new HTMLGame.SpriteSheet("playerRight",srcObj.player,{width:128,height:144,frameSize:[32,48],loop:true,beginY:96}));
 	this.addAnimation(new HTMLGame.SpriteSheet("playerUp",srcObj.player,{width:128,height:192,frameSize:[32,48],loop:true,beginY:144}));
 }
-player.prototype.walk = function()
+
+player.prototype.walk = function()                /* 设置当前人物动画*/
 {
-	console.log();
 	if(isToLeft(this)){
 		this.setCurrentAnimation("playerLeft");	
 	}
@@ -115,6 +116,7 @@ var canDown = function(obj,map){
 	var posValue = map.getPosValue(obj.x,obj.y+obj.height);
 	return (posValue == 0 );
 }
+
 /*	判断朝向是否为某方向	*/
 var isToRight = function(obj) { return obj.angle == 0  ; }
 var isToLeft  = function(obj) { return obj.angle == 180; }
@@ -228,7 +230,7 @@ var detectMove = function(obj,dir,map){
 		return;
 	}
 	if(map.isMatchCell(obj))
-	{//使player保持与格子重合
+	{/*使player保持与格子重合*/
 	    if(dir == "right") 
 		{
 			if(canRight(obj,map)) 
@@ -268,7 +270,7 @@ var detectMove = function(obj,dir,map){
 	}
 }
 
-var gameObj = (function()
+var gameObj = (function()/*每张地图的游戏框架*/
 {
 	return{
 		/*	初始化	*/
@@ -291,10 +293,6 @@ var gameObj = (function()
 			{
 				MapManager.startMap(mapNumber);
 			}
-			else
-			{	
-			
-			}
 		},
 		/*	更新	*/
 		update:function(duration){
@@ -302,7 +300,7 @@ var gameObj = (function()
 			var list = HTMLGame.spriteList;
 			var _map = this.map;
 			var _player = this.player;
-			//键盘控制player的移动和探索
+			/*键盘操作判定*/
 			if(gameStaus == 1)
 			{
 				if(HTMLGame.input.isPressed("right")){
@@ -493,10 +491,30 @@ var gameObj = (function()
 				}
 				keyLast += duration;
 			}
+			else if(gameStaus == 7)
+			{
+				if(HTMLGame.input.isPressed("z")){
+					if(keyLast > keyDuration){
+						keyLast = 0;
+						investigate.start.check();
+					}
+				}
+				keyLast += duration;
+			}
+			else if(gameStaus == 8)
+			{
+				if(HTMLGame.input.isPressed("z")){
+					if(keyLast > keyDuration){
+						keyLast = 0;
+						investigate.end.check()
+					}
+				}
+				keyLast += duration;
+			}
 			list[0].walk();
 			
 		},
-		/*	画出实时地图	*/
+		/*	画出实时地图,没用到	*/
 		draw:function(){
 		},
 		/*	结束游戏	*/
@@ -510,34 +528,30 @@ var gameObj = (function()
 /*	开始界面对象	*/
 var startObj={
 	initialize:function(options){
-		var name="";
-		var begin="";
-		var state1="";
-		var state2="";
 		this.startSrc=options.srcObj.startSrc;
-		this.text1=HTMLGame.shape.Text(name,{x:200,y:150,style:"#000",font:"bold 36px sans-serif"});
-		this.text2=HTMLGame.shape.Text(begin,{x:160,y:240,style:"#000",font:"bold 32px sans-serif"});
-		this.text3=HTMLGame.shape.Text(state1,{x:40,y:310,style:"#000",font:"bold 15px sans-serif"});
-		this.text4=HTMLGame.shape.Text(state2,{x:120,y:330,style:"#000",font:"bold 15px sans-serif"});
 		HTMLGame.input.onKeyDown("enter",function(){
 			if(gameStaus ==0 ){
 				var playerPosition=[3,11];
+				gameStaus = 7;
 				MapManager.startMap("1");
-				gameStaus = 1;
+				investigate.start.check();
 			}
 		});
 	},
 	draw:function(){
-		HTMLGame.context.drawImage(HTMLGame.pictureLoader.loadedImgs[this.startSrc],0,0,HTMLGame.width,HTMLGame.height);//画出开始界面
-		this.text1.draw();
-		this.text2.draw();
-		this.text3.draw();
-		this.text4.draw();
+		HTMLGame.context.drawImage(HTMLGame.pictureLoader.loadedImgs[this.startSrc],0,0,HTMLGame.width,HTMLGame.height);/*画出开始界面*/
 	}
 }
 
-
-var keyzdown1 = function(mapN)
-{
-	investigate.map[mapN - 1].mapevent[targe - 4].check();
-};
+/*结局界面对象*/
+var EndObj={
+	initialize:function(options){
+		this.endSrc=options.srcObj.endSrc;
+		HTMLGame.input.onKeyDown("z",function(){
+			investigate.end.check();
+		});
+	},
+	draw:function(){
+		$('#backgroundCanvas')[0].getContext('2d').drawImage(HTMLGame.pictureLoader.loadedImgs[this.endSrc],0,0,HTMLGame.width,HTMLGame.height);
+	}
+}

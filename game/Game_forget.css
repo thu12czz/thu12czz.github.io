@@ -1,0 +1,140 @@
+@charset "utf-8";
+/* CSS Document */
+html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,code,del,dfn,em,img,q,dl,dt,dd,ol,ul,li,fieldset,form,input,textarea,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,i,em{margin:0;padding:0;font-style:normal;}
+
+#item{
+	background-image:url(images/bdtext.png);
+	position:absolute;
+	left:170px;
+	top:130px;	
+	width:460px;
+	height:160px;
+	opacity: 0;
+	font-size:14px;
+}
+
+#item tr{
+	width:460px;
+	height:40px;
+}
+
+#item td{
+	width:115px;
+	height:40px;
+	text-align:center;
+}
+
+#gameCanvas{
+	position:absolute;
+	left:84px;
+	top:32px;
+}
+
+#backgroundCanvas{
+	position:absolute;
+	left:80px;
+	top:40px;
+	width:640px;
+	height:520px;
+}
+
+#information{
+	background-image:url(images/bdtext.png);
+	position:absolute;
+	left:200px;
+	top:400px;	
+	width:400px;
+	height:80px;
+	opacity: 0;
+}
+
+#information p{
+	position:absolute;
+	left : 20px;
+	width: 360px;
+	height : 20px;
+	font-size:16px;
+	margin:0px;
+}
+
+.information1{
+	color:#F00
+}
+
+.information2{
+	color:#000;
+}
+
+#information p:nth-child(1){
+	top:10px;
+}
+#information p:nth-child(2){
+	top:50px;
+}
+
+#prompt{
+	background-image:url(images/bdtext.png);
+	position:absolute;
+	left:320px;
+	top:300px;	
+	width:160px;
+	height:70px;
+	opacity: 0;
+}
+#prompt p{
+	position:absolute;
+	left:20px;
+	width:120px;
+	height:20px;
+	font-size:12px;
+	text-align:center;
+	margin:0px;
+}
+
+#prompt p:nth-child(1){ 
+	top:10px;
+}
+
+#prompt p:nth-child(2){ 
+	top:30px;
+}
+
+#prompt p:nth-child(3){ 
+	top:50px;
+}
+
+#Iteminformation{
+	background-image:url(images/bdtext.png);
+	position:absolute;
+	left:200px;
+	top:400px;	
+	width:400px;
+	height:80px;
+	opacity: 0;
+	font-size:16px;
+}
+
+#Iteminformation p{
+	position:absolute;
+	top:10px;
+	left : 20px;
+	width: 360px;
+	height : 20px;
+	font-size:16px;
+	margin: 0px;
+}
+
+#inputPassword {		
+	position:absolute;
+	left:280px;
+	top:300px;	
+	width: 200px;
+	height: 26px;
+	margin: auto;
+	opacity: 0;
+	background-color: rgb(83,150,203);
+}
+
+#password {
+margin-left: 25px;
+}

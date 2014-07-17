@@ -1,5 +1,7 @@
 // JavaScript Document
-
+/*这是一个简单的游戏框架js,参考了网上的一些框架代码*/
+/*我最初想写一个可以复用的简单框架，但是时间，能力有限，功能还比较简单*/
+/*写完它发现能用的有限，尤其是动画部分，游戏中用的很少！！*/
 (function(win, undefined) 
 {
 	var HTMLGame = 
@@ -594,13 +596,9 @@ HTMLGame.NewSpace("HTMLGame.shape",function(argu)
 	
 	}
 	text.prototype={
-		/**
-		 *初始化
-		**/
+		/*初始化*/
 		init:function(text,options){
-			/**
-			 *默认值对象
-			**/
+			/*默认值对象*/
 			var defaultObj={
 				x:100,
 				y:100,
@@ -613,9 +611,7 @@ HTMLGame.NewSpace("HTMLGame.shape",function(argu)
 			this.setOptions(options);
 			this.text=text;		
 		},
-		/**
-		*绘制
-		**/
+		/*绘制*/
 		draw:function(){
 			var context = argu.context;
 			(typeof(this.font) != 'undefined')&&(context.font=this.font);
@@ -631,9 +627,7 @@ HTMLGame.NewSpace("HTMLGame.shape",function(argu)
 				this.maxWidth?context.strokeText(this.text,this.x,this.y,this.maxWidth):context.strokeText(this.text,this.x,this.y);
 			}
 		},
-		/**
-		*设置参数
-		**/
+		/*设置参数*/
 		setOptions:function(options){
 			this.x = options.x || this.x;
 			this.y = options.y || this.y;
@@ -869,15 +863,11 @@ HTMLGame.NewSpace("HTMLGame", function(argu)
 			this.currentIndex=index;
 			return this.frames[this.currentIndex];	
 		},
-		/**
-		 *获取现时帧
-		**/
+		/*获取现时帧*/
 		getCurrentFrame:function(){
 			return this.frames[this.currentIndex];	
 		},
-		/**
-		 *在特定位置绘制该帧
-		**/
+		/*在特定位置绘制该帧*/
 		draw:function(){
 			
 			var currentFrame=this.getCurrentFrame();
@@ -891,11 +881,7 @@ HTMLGame.NewSpace("HTMLGame", function(argu)
 										
 });
 
-/**
- *
- *sprite对象
- *
-**/
+/*sprite对象*/
 HTMLGame.NewSpace("HTMLGame", function(argu) 
 {							  
 	var postive_infinity=Number.POSITIVE_INFINITY;			
@@ -907,14 +893,10 @@ HTMLGame.NewSpace("HTMLGame", function(argu)
 		this.init(id,options);
 	}
 	sprite.prototype={
-		/**
-		 *初始化
-		**/
+		/*初始化*/
 		init:function(options){
 			
-			/**
-			 *默认对象
-			**/	
+			/*默认对象*/	
 			var defaultObj={
 				x:0,
 				y:0,
@@ -971,22 +953,16 @@ HTMLGame.NewSpace("HTMLGame", function(argu)
 			}
 			
 		},
-		/**
-		 *返回包含该sprite的矩形对象
-		**/
+		/*返回包含该sprite的矩形对象*/
 		getRect:function(){
 			return new argu.shape.Rect({x:this.x,y:this.y,width:this.width,height:this.height});
 			
 		},
-		/**
-		 *添加动画
-		**/
+		/*添加动画*/
 		addAnimation:function(spriteSheet){
 			this.spriteSheetList[spriteSheet.id]=spriteSheet;	
 		},
-		/**
-		 *设置当前显示动画
-		**/
+		/*设置当前显示动画*/
 		setCurrentAnimation:function(id){//可传入id或spriteSheet
 			if(!this.isCurrentAnimation(id)){
 				if(typeof(id) == 'string'){
@@ -1001,9 +977,7 @@ HTMLGame.NewSpace("HTMLGame", function(argu)
 			}
 		
 		},
-		/**
-		 *判断当前动画是否为该id的动画
-		**/
+		/*判断当前动画是否为该id的动画*/
 		isCurrentAnimation:function(id){
 			if(typeof(id) == 'string'){
 				return (this.spriteSheet&&this.spriteSheet.id===id);
@@ -1012,9 +986,7 @@ HTMLGame.NewSpace("HTMLGame", function(argu)
 				return this.spriteSheet===id;
 			}
 		},
-		/**
-		 *设置当前显示图像
-		**/
+		/*设置当前显示图像*/
 		setCurrentImage:function(src,imgX,imgY){
 			if(!this.isCurrentImage(src,imgX,imgY)){
 				imgX=imgX||0;
@@ -1025,61 +997,17 @@ HTMLGame.NewSpace("HTMLGame", function(argu)
 				this.spriteSheet=undefined;
 			}
 		},
-		/**
-		 *判断当前图像是否为该src的图像
-		**/
+		/*判断当前图像是否为该src的图像*/
 		isCurrentImage:function(src,imgX,imgY){
-			imgX=imgX||0;
-			imgY=imgY||0;
+			imgX = imgX||0;
+			imgY = imgY||0;
 			var image=this.image;
 			if(typeof(src)=='string'){
 				return (image&&image.srcPath===src&&this.imgX===imgX&&this.imgY===imgY);
 			}
 		},
-			/**
-		 *设置移动参数
-		**/
-		setMovement:function(options){
-			isUndefined=argu.Basis.isUndefined;
-			isUndefined(options.speedX)?this.speedX=this.speedX:this.speedX=options.speedX;
-			isUndefined(options.speedY)?this.speedY=this.speedY:this.speedY=options.speedY;
-			isUndefined(options.rotateSpeed)?this.rotateSpeed=this.rotateSpeed:this.rotateSpeed=options.rotateSpeed;
-			isUndefined(options.aX)?this.aR=this.aR:this.aR=options.aR;
-			isUndefined(options.aX)?this.aX=this.aX:this.aX=options.aX;
-			isUndefined(options.aY)?this.aY=this.aY:this.aY=options.aY;
-			isUndefined(options.maxX)?this.maxX=this.maxX:this.maxX=options.maxX;
-			isUndefined(options.maxY)?this.maxY=this.maxY:this.maxY=options.maxY;
-			isUndefined(options.maxAngle)?this.maxAngle=this.maxAngle:this.maxAngle=options.maxAngle;
-			isUndefined(options.minAngle)?this.minAngle=this.minAngle:this.minAngle=options.minAngle;
-			isUndefined(options.minX)?this.minX=this.minX:this.minX=options.minX;
-			isUndefined(options.minY)?this.minY=this.minY:this.minY=options.minY;
-			isUndefined(options.maxSpeedX)?this.maxSpeedX=this.maxSpeedX:this.maxSpeedX=options.maxSpeedX;	
-			isUndefined(options.maxSpeedY)?this.maxSpeedY=this.maxSpeedY:this.maxSpeedY=options.maxSpeedY;	
 			
-			
-		},
-		/**
-		 *重置移动参数回到初始值
-		**/
-		resetMovement:function(){
-			this.speedX=0;
-			this.speedY=0;
-			this.rotateSpeed=0;
-			this.aX=0;
-			this.aY=0;
-			this.aR=0;
-			this.maxSpeedX=postive_infinity;
-			this.maxSpeedY=postive_infinity;
-			this.maxX=postive_infinity;
-			this.minX=-postive_infinity;
-			this.maxY=postive_infinity;
-			this.minY=-postive_infinity;
-			this.maxAngle=postive_infinity;
-			this.minAngle=-postive_infinity;
-		},
-			/**
-		 *更新位置和帧动画
-		**/
+		/*更新位置和帧动画*/
 		update:function(duration){//duration:该帧历时 单位：秒
 			this.speedX=this.speedX+this.aX*duration;	
 			if(this.maxSpeedX<0){
@@ -1112,9 +1040,7 @@ HTMLGame.NewSpace("HTMLGame", function(argu)
 				this.spriteSheet.update();
 			}
 		},
-		/**
-		 *绘制出sprite
-		**/
+		/*绘制出sprite*/
 		draw:function(){
 			var context=argu.context;
 			var halfWith;
@@ -1135,9 +1061,7 @@ HTMLGame.NewSpace("HTMLGame", function(argu)
 			}
 		
 		},
-		/**
-		 *移动一定距离
-		**/
+		/*移动一定距离*/
 		move:function(dx,dy){
 			dx=dx||0;
 			dy=dy||0;
@@ -1148,17 +1072,13 @@ HTMLGame.NewSpace("HTMLGame", function(argu)
 			return this;
 			
 		},
-		/**
-		 *移动到某处
-		**/
+		/*移动到某处*/
 		moveTo:function(x,y){
 			this.x=Math.min(Math.max(this.minX,x),this.maxX);
 			this.y=Math.min(Math.max(this.minY,y),this.maxY);
 			return this;
 		},
-		/**
-		 *旋转一定角度
-		**/
+		/*旋转一定角度*/
 		rotate:function(da){
 			da=da||0;
 			var angle=this.angle+da;
@@ -1166,25 +1086,19 @@ HTMLGame.NewSpace("HTMLGame", function(argu)
 			this.angle=Math.min(Math.max(this.minAngle,angle),this.maxAngle);
 			return this;
 		},
-		/**
-		 *旋转到一定角度
-		**/
+		/*旋转到一定角度*/
 		rotateTo:function(a){
 			this.angle=Math.min(Math.max(this.minAngle,a),this.maxAngle);
 			return this;
 			
 		},
-		/**
-		 *改变一定尺寸
-		**/
+		/*改变一定尺寸*/
 		resize:function(dw,dh){
 			this.width+=dw;
 			this.height+=dh;
 			return this;
 		},
-		/**
-		 *改变到一定尺寸
-		**/
+		/*改变到一定尺寸*/
 		resizeTo:function(width,height){
 			this.width=width;
 			this.height=height;
@@ -1220,18 +1134,12 @@ HTMLGame.NewSpace("HTMLGame", function(argu)
 	this.spriteList=spriteList;
 });
 
-/**
- *
- *游戏循环
- *
-**/
+/*游戏循环*/
 HTMLGame.NewSpace("HTMLGame", function(argu) 
 {
 	var timeId;
 	var interval;
-	/**
-	*循环方法
-	**/	
+	/*循环方法*/	
 	var loop=function(){
 		var self=this;
 		return function(){
@@ -1267,13 +1175,9 @@ HTMLGame.NewSpace("HTMLGame", function(argu)
 		this.init(gameObj,options);	
 	}
 	gameLoop.prototype={
-		/**
-		 *初始化
-		**/
+		/*初始化*/
 		init:function(gameObj,options){
-			/**
-			 *默认对象
-			**/	
+			/*默认对象*/	
 			var defaultObj={
 				fps:30
 			};
@@ -1288,9 +1192,7 @@ HTMLGame.NewSpace("HTMLGame", function(argu)
 			this.stop=true;
 		},
 			
-		/**
-		 *开始循环
-		**/	
+		/*开始循环*/	
 		start:function(){
 			if(this.stop){		//如果是结束状态则可以开始
 				this.stop=false;
@@ -1300,21 +1202,16 @@ HTMLGame.NewSpace("HTMLGame", function(argu)
 				this.loopDuration=0;	
 				loop.call(this)();	
 			}	
-		},		/**
-		 *继续循环
-		**/	
+		},		
+		/*继续循环*/	
 		run:function(){
 			this.pause=false;	
 		},
-		/**
-		 *暂停循环
-		**/	
+		/*暂停循环*/	
 		pause:function(){
 			this.pause=true;	
 		},
-		/**
-		 *停止循环
-		**/	
+		/*停止循环*/	
 		end:function(){
 			this.stop=true;
 			window.clearTimeout(timeId);

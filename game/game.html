@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>FORGET</title>
+
+</head>
+
+<body>
+<div id="wrap">
+<canvas id="backgroundCanvas" height="520" width="640"></canvas>
+<canvas id="gameCanvas"></canvas>
+<audio src="images/bgm.mp3" loop = "loop" autoplay="autoplay"></audio>
+<div id = 'item'>
+	<table id = 'itemtable'>
+		<tr>
+        	<td></td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+        	<td></td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+        	<td></td><td></td><td></td><td></td>
+        </tr>
+         <tr>
+        	<td></td><td></td><td></td><td></td>
+        </tr>
+    </table>  
+</div>
+<div id = 'prompt'> </div>
+<div id = 'information'></div>
+<div id = 'Iteminformation'></div>
+<div id="inputPassword">
+<input type="text"  id="password" onkeypress="checkForm()"/></div>
+</div>
+
+</body>
+<script type='text/javascript' src="HTMLGame.js"></script>
+<script type='text/javascript' src='jquery-2.1.1.min.js'></script>
+<script type='text/javascript' src="game.js"></script>
+<script type='text/javascript' src="map.js"></script>
+<script type='text/javascript' src="event.js"></script>
+<script type='text/javascript' src="ItemList.js"></script>
+<link href='Game_forget.css' rel='stylesheet' type='text/css'>
+</html>
